@@ -7,9 +7,27 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 7;
     [SerializeField] private float ratateSpeed = 10;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask counterLayerMask;
+
     private bool isWalking = false;
 
+    private void Update()
+    {
+        HandleInteraction();
+    }
+
     private void FixedUpdate()
+    {
+        HandleMovement();
+    }
+    public bool IsWalking
+    {
+        get
+        {
+            return isWalking;
+        }
+    }
+    private void HandleMovement()
     {
         Vector3 direction = gameInput.GetMovementDirectionNormalized();
 
@@ -21,11 +39,15 @@ public class Player : MonoBehaviour
             transform.forward = Vector3.Slerp(transform.forward, direction, Time.deltaTime * ratateSpeed);
         }
     }
-    public bool IsWalking
+    private void HandleInteraction()
     {
-        get
+     
+        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hitinfo, 2f,counterLayerMask))
         {
-            return isWalking;
+            if(hitinfo.transform.TryGetComponent<ClearCounter>(out ClearCounter counter))
+            {
+                counter.Interact();
+            }
         }
     }
 }
