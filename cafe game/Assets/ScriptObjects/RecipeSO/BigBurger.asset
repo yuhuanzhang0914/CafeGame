@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87331d9d4ff74048bf5eca289cf7a2d, type: 3}
   m_Name: BigBurger
   m_EditorClassIdentifier: 
-  recipleName: "\u6C49\u5821\u5305"
+  recipleName: Big Burger
   kitchenObjectSOList:
   - {fileID: 11400000, guid: f2b165b7d353fdf40a74dfd203c2040c, type: 2}
   - {fileID: 11400000, guid: 290c44df1cb417e4e9d77c6a7e96b6c2, type: 2}
