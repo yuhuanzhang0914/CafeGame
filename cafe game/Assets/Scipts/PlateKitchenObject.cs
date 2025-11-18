@@ -8,6 +8,8 @@ public class PlateKitchenObject :KitchenObject
 
     [SerializeField] private PlateCompleteVisual plateCompleteVisual;
 
+    [SerializeField] private KitchenObjectGridUI kitchenObjectGridUI;
+
 
     private List<KitchenObjectSO> kitchenObjectSOList = new List<KitchenObjectSO>();
 
@@ -22,6 +24,7 @@ public class PlateKitchenObject :KitchenObject
             return false;
         }
         plateCompleteVisual.ShowKitchenObject(kitchenObjectSO);
+        kitchenObjectGridUI.ShowKitchenObjectUI(kitchenObjectSO);
         kitchenObjectSOList.Add(kitchenObjectSO);
         return true;
     }
