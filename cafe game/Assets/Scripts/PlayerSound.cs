@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerSound : MonoBehaviour
 {
     private Player player;
-    private float stepSoundRate = 0.1f;
+    private float stepSoundRate = 0.14f;
     private float stepSoundTimer = 0;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class PlayerSound : MonoBehaviour
             stepSoundTimer = 0;
             if (player.IsWalking)
             {
-                float volume = 1;
+                float volume = 2;
                 SoundManager.Instance.PlayStepSound(volume);
             }
         }
