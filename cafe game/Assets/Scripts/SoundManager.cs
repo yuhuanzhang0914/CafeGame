@@ -11,6 +11,11 @@ public class SoundManager : MonoBehaviour
     {
         OrderManager.Instance.OnRecipeSuccess += OrderManager_OnRecipeSuccess;
         OrderManager.Instance.OnRecipeFailed += OrderManager_OnRecipeFailed;
+        CuttingCounter.OnCut += CuttingCounter_OnCut;
+    }
+    private void CuttingCounter_OnCut(object sender,System. EventArgs e)
+    {
+        PlaySound(audioClipRefsSO.chop);
     }
 
     private void OrderManager_OnRecipeSuccess(object sender, EventArgs e)
