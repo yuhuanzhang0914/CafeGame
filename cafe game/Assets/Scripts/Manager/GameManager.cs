@@ -1,10 +1,13 @@
+using System;                     
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-  
+    public static GameManager Instance { get; private set; }
+    public event EventHandler OnStateChanged;
+
     private enum State
     {
         WaitingToStart,
@@ -12,20 +15,26 @@ public class GameManager : MonoBehaviour
         GamePlaying,
         GameOver
     }
+
     [SerializeField] private Player player;
 
-   private State state;
+    private State state;
 
     private float waitingToStartTimer = 1f;
     private float countDownToStartTimer = 3f;
     private float gamePlayingTimer = 10f;
 
-    void Awake()
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
     {
         TurnToWaitingToStart();
     }
 
-    void Update()
+    private void Update()          
     {
         switch (state)
         {
@@ -57,33 +66,52 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
     private void TurnToWaitingToStart()
     {
         state = State.WaitingToStart;
         DisablePlayer();
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
+
     private void TurnToCountDownToStart()
     {
         state = State.CountDownToStart;
         DisablePlayer();
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void TurnToGamePlaying()
     {
         state = State.GamePlaying;
         EnablePlayer();
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void TurnToGameOver()
     {
         state = State.GameOver;
+        DisablePlayer();
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
+
     private void DisablePlayer()
     {
-        player.enabled = false;
-    } 
+        if (player != null)
+            player.enabled = false;
+    }
+
     private void EnablePlayer()
     {
-        player.enabled= true;
+        if (player != null)
+            player.enabled = true;
+    }
+    public bool IsCountDownState()
+    {
+        return state == State.CountDownToStart;
+    }
+    public float GetCountDownToStartTimer()
+    {
+        return countDownToStartTimer;
     }
 }

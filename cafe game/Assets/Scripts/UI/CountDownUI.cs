@@ -1,18 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using TMPro;  
 
 public class CountDownUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI numberText;  
+
+    private void Start()
     {
-        
+        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+        UpdateVisual(); 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        GameManager.Instance.OnStateChanged -= GameManager_OnStateChanged;
+    }
+    private void Update()
+    {
+        if(GameManager.Instance.IsCountDownState())
+        {
+            numberText.text = Mathf.CeilToInt(GameManager.Instance.GetCountDownToStartTimer()).ToString();
+        }
+    }
+
+    private void GameManager_OnStateChanged(object sender, EventArgs e)
+    {
+        UpdateVisual();
+    }
+
+    private void UpdateVisual()
+    {
+        if (GameManager.Instance.IsCountDownState())
+        {
+            numberText.gameObject.SetActive(true);
+        }
+        else
+        {
+           numberText.gameObject.SetActive(false);
+        }
     }
 }
