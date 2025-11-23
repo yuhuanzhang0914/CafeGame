@@ -10,10 +10,10 @@ public class OrderListUI : MonoBehaviour
     private void Start()
     {
         recipeUITemplate.gameObject.SetActive(false);
-        OrderMananger.Instance.OnRecipeSpawned += OrderManager_OnRecipeSpawned;
-        OrderMananger.Instance.OnRecipeSuccessed += OrderManager_OnRecipeSuccessed;
+        OrderManager.Instance.OnRecipeSpawned += OrderManager_OnRecipeSpawned;
+        OrderManager.Instance.OnRecipeSuccess += OrderManager_OnRecipeSuccess;
     }
-    private void OrderManager_OnRecipeSuccessed(object sender, System.EventArgs e)
+    private void OrderManager_OnRecipeSuccess(object sender, System.EventArgs e)
     {
         UpdateUI();
     }
@@ -34,7 +34,7 @@ public class OrderListUI : MonoBehaviour
             }
         }
 
-        List<RecipeSO> recipeSOList = OrderMananger.Instance.GetOrderList();
+        List<RecipeSO> recipeSOList = OrderManager.Instance.GetOrderList();
         foreach (RecipeSO recipeSO in recipeSOList)
         {
             RecipeUI recipeUI = GameObject.Instantiate(recipeUITemplate);

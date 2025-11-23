@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class OrderMananger : MonoBehaviour
+public class OrderManager : MonoBehaviour
 {
-    public static OrderMananger Instance { get; private set; }
+    public static OrderManager Instance { get; private set; }
 
     public event EventHandler OnRecipeSpawned;
-    public event EventHandler OnRecipeSuccessed;
-
+    public event EventHandler OnRecipeSuccess;
+    public event EventHandler OnRecipeFailed;
 
 
 
@@ -71,12 +71,12 @@ public class OrderMananger : MonoBehaviour
         if (correctRecipe == null)
         {
             print("dish served failed");
-   
+            OnRecipeFailed?.Invoke(this, EventArgs.Empty);
         }
         else
         {
             orderRecipeSOList.Remove(correctRecipe);
-            OnRecipeSuccessed?.Invoke(this, EventArgs.Empty);
+            OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
             print("dish served successfully");
         }
 

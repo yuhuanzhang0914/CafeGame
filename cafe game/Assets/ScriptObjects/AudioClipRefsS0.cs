@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu()]
-public class AudioClipRefsS0 : ScriptableObject
+public class AudioClipRefsS0: ScriptableObject
 {
     public AudioClip[] chop;
     public AudioClip[] deliveryFail;
