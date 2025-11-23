@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class StoveCounter : BaseCounter
     [SerializeField] private FryingRecipeListSO burningRecipeList;
     [SerializeField] private StoveCounterVisual stoveCounterVisual;
     [SerializeField] private ProgressBarUI progressBarUI;
+    [SerializeField] private AudioSource sound;
+
 
     public enum StoveState
     {
@@ -100,12 +103,13 @@ public class StoveCounter : BaseCounter
         this.fryingRecipe = fryingRecipe;
         state = StoveState.Frying;
         stoveCounterVisual.ShowStoveEffect();
+        sound.Play();
     }
     private void StartBurning(FryingRecipe fryingRecipe)
     {
         if(fryingRecipe==null)
         {
-            print("无法获得burning的食谱，无法进行burning！");
+            print("I can't get the recipe for burning, so I can't burn！");
             TurnToIdle();
             return;
         }
@@ -113,12 +117,14 @@ public class StoveCounter : BaseCounter
         fryingTimer = 0;
         this.fryingRecipe = fryingRecipe;
         state = StoveState.Burning;
+        sound.Play();
     }
     private void TurnToIdle()
     {
         progressBarUI.Hide();
         state = StoveState.Idle;
         stoveCounterVisual.HideStoveEffect();
+        sound.Pause();
     }
 
 }
