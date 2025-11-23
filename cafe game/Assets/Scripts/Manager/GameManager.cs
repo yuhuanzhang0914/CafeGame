@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+  
     private enum State
     {
         WaitingToStart,
@@ -11,8 +12,9 @@ public class GameManager : MonoBehaviour
         GamePlaying,
         GameOver
     }
+    [SerializeField] private Player player;
 
-    private State state;
+   private State state;
 
     private float waitingToStartTimer = 1f;
     private float countDownToStartTimer = 3f;
@@ -20,10 +22,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        state = State.WaitingToStart;
+        TurnToWaitingToStart();
     }
 
-    // Update is called once per frame
     void Update()
     {
         switch (state)
@@ -54,24 +55,35 @@ public class GameManager : MonoBehaviour
 
             case State.GameOver:
                 break;
-
-            default:
-                break;
         }
     }
-
+    private void TurnToWaitingToStart()
+    {
+        state = State.WaitingToStart;
+        DisablePlayer();
+    }
     private void TurnToCountDownToStart()
     {
         state = State.CountDownToStart;
+        DisablePlayer();
     }
 
     private void TurnToGamePlaying()
     {
         state = State.GamePlaying;
+        EnablePlayer();
     }
 
     private void TurnToGameOver()
     {
         state = State.GameOver;
+    }
+    private void DisablePlayer()
+    {
+        player.enabled = false;
+    } 
+    private void EnablePlayer()
+    {
+        player.enabled= true;
     }
 }
