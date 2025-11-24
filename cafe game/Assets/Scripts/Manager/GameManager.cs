@@ -1,4 +1,4 @@
-using System;                     
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +6,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+
     public event EventHandler OnStateChanged;
 
-    private enum State
+  
+    public enum State
     {
         WaitingToStart,
         CountDownToStart,
@@ -20,13 +23,22 @@ public class GameManager : MonoBehaviour
 
     private State state;
 
-    private float waitingToStartTimer = 1f;
-    private float countDownToStartTimer = 3f;
-    private float gamePlayingTimer = 10f;
+
+    [SerializeField] private float waitingToStartTimer = 1f;
+    [SerializeField] private float countDownToStartTimer = 3f;
+    [SerializeField] private float gamePlayingTimer = 60f;
 
     private void Awake()
     {
+   
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
+     
     }
 
     private void Start()
@@ -34,7 +46,7 @@ public class GameManager : MonoBehaviour
         TurnToWaitingToStart();
     }
 
-    private void Update()          
+    private void Update()
     {
         switch (state)
         {
@@ -63,6 +75,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case State.GameOver:
+               
                 break;
         }
     }
@@ -96,27 +109,38 @@ public class GameManager : MonoBehaviour
     }
 
     private void DisablePlayer()
-    {
-        if (player != null)
-            player.enabled = false;
+    { 
+            player.enabled = false;  
     }
 
     private void EnablePlayer()
     {
-        if (player != null)
-            player.enabled = true;
+            player.enabled = true; 
     }
+
     public bool IsCountDownState()
     {
         return state == State.CountDownToStart;
     }
+
     public bool IsGamePlayingState()
     {
         return state == State.GamePlaying;
     }
+
+    public bool IsGameOverState()
+    {
+        return state == State.GameOver;
+    }
+
     public float GetCountDownToStartTimer()
     {
         return countDownToStartTimer;
     }
 
+ 
+    public State GetState()
+    {
+        return state;
+    }
 }

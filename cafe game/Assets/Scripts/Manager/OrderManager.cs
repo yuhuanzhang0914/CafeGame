@@ -11,8 +11,6 @@ public class OrderManager : MonoBehaviour
     public event EventHandler OnRecipeSuccess;
     public event EventHandler OnRecipeFailed;
 
-
-
     [SerializeField] private RecipeListSO recipeSOList;
     [SerializeField] private int orderMaxCount = 5;
     [SerializeField] private float orderRate = 2;
@@ -22,22 +20,27 @@ public class OrderManager : MonoBehaviour
     private float orderTimer = 0;
     private bool isStartOrder = false;
     private int orderCount = 0;
+    private int successOrderCount = 0;
+    private int successDeliverCount = 0;
 
     private void Awake()
     {
         Instance = this;
     }
+
     private void Start()
     {
         GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
     }
-   private void GameManager_OnStateChanged(object sebder,EventArgs e)
+
+    private void GameManager_OnStateChanged(object sender, EventArgs e)
     {
-    if(GameManager.Instance.IsGamePlayingState())
+        if (GameManager.Instance.IsGamePlayingState())
         {
             StartSpawnOrder();
         }
     }
+
     private void Update()
     {
         if (isStartOrder)
@@ -65,6 +68,7 @@ public class OrderManager : MonoBehaviour
         orderRecipeSOList.Add(recipeSOList.recipeSOList[index]);
         OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
     }
+
     public void DeliveryRecipe(PlateKitchenObject plateKitchenObject)
     {
         RecipeSO correctRecipe = null;
@@ -72,9 +76,11 @@ public class OrderManager : MonoBehaviour
         {
             if (IsCorrect(recipe, plateKitchenObject))
             {
-                correctRecipe = recipe; break;
+                correctRecipe = recipe;
+                break;
             }
         }
+
         if (correctRecipe == null)
         {
             print("dish served failed");
@@ -84,10 +90,10 @@ public class OrderManager : MonoBehaviour
         {
             orderRecipeSOList.Remove(correctRecipe);
             OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
+            successDeliverCount++;
             print("dish served successfully");
         }
-
-     }
+    }
 
     private bool IsCorrect(RecipeSO recipe, PlateKitchenObject plateKitchenObject)
     {
@@ -98,22 +104,28 @@ public class OrderManager : MonoBehaviour
 
         foreach (KitchenObjectSO kitchenObjectSO in list1)
         {
-            if (list2.Contains(kitchenObjectSO) == false)
+            if (!list2.Contains(kitchenObjectSO))
             {
                 return false;
             }
         }
 
         return true;
-
     }
 
     public List<RecipeSO> GetOrderList()
     {
         return orderRecipeSOList;
     }
+
     public void StartSpawnOrder()
     {
         isStartOrder = true;
+    }
+
+    public int GetSuccessDeliveryCount()
+    {
+        // ? 这里改成返回成功送达的数量
+        return successDeliverCount;
     }
 }
