@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+   
     public static GameManager Instance { get; private set; }
 
 
@@ -27,9 +28,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float waitingToStartTimer = 1f;
     [SerializeField] private float countDownToStartTimer = 3f;
     [SerializeField] private float gamePlayingTimer = 60f;
+    private bool isGamePause = false;
 
     private void Awake()
     {
+
    
         if (Instance != null && Instance != this)
         {
@@ -44,6 +47,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         TurnToWaitingToStart();
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+
+    }
+    private void GameInput_OnPauseAction(object sender,EventArgs e)
+    {
+        ToggleGame();
     }
 
     private void Update()
@@ -142,5 +151,17 @@ public class GameManager : MonoBehaviour
     public State GetState()
     {
         return state;
+    }
+    private void ToggleGame()
+    {
+        isGamePause = !isGamePause;
+        if(isGamePause)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }
