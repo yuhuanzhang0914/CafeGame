@@ -11,6 +11,7 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Button soundButton;
     [SerializeField] private TextMeshProUGUI soundButtonText;
     [SerializeField] private Button musicButton;
+   [SerializeField] private TextMeshProUGUI musicButtonText;
     [SerializeField] private Button closeButton;
     private void Awake()
     {
@@ -29,8 +30,9 @@ public class SettingsUI : MonoBehaviour
 
         musicButton.onClick.AddListener(() =>
         {
-            // 如果有单独的音乐音量管理，在这里调用
-            // MusicManager.Instance.ChangeVolume();
+           
+            MusicManager.Instance.ChangeVolume();
+            UpdateVisual();
         });
 
         closeButton.onClick.AddListener(() =>
@@ -51,5 +53,6 @@ public class SettingsUI : MonoBehaviour
     void UpdateVisual()
     {
         soundButtonText.text = "Sound volume:" + SoundManager.Instance.GetVolume();
+        musicButtonText.text = "Music volume:" + MusicManager.Instance.GetVolume();
     }
 }
