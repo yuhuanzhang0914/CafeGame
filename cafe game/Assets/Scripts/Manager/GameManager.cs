@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         gamePlayingTimeTotal = gamePlayingTimer;
     }
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case State.WaitingToStart:
-                waitingToStartTimer -= Time.unscaledDeltaTime;
+                waitingToStartTimer -= Time.deltaTime;
                 if (waitingToStartTimer <= 0f)
                 {
                     TurnToCountDownToStart();
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case State.CountDownToStart:
-                countDownToStartTimer -= Time.unscaledDeltaTime;
+                countDownToStartTimer -= Time.deltaTime;
                 if (countDownToStartTimer <= 0f)
                 {
                     TurnToGamePlaying();
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case State.GamePlaying:
-                gamePlayingTimer -= Time.unscaledDeltaTime;
+                gamePlayingTimer -= Time.deltaTime;
                 if (gamePlayingTimer <= 0f)
                 {
                     TurnToGameOver();
@@ -164,7 +165,13 @@ public class GameManager : MonoBehaviour
         OnGameUnpaused?.Invoke(this, EventArgs.Empty);
     }
 
-    // ========= 对外查询接口 =========
+    // ========= 状态查询 =========
+
+    // 供 UITutorialUI 等脚本调用
+    public bool IsWaitingToStartState()
+    {
+        return state == State.WaitingToStart;
+    }
 
     public bool IsCountDownState()
     {
@@ -181,6 +188,8 @@ public class GameManager : MonoBehaviour
         return state == State.GameOver;
     }
 
+    // ========= 对外提供的计时信息 =========
+
     public float GetCountDownToStartTimer()
     {
         return countDownToStartTimer;
@@ -190,10 +199,12 @@ public class GameManager : MonoBehaviour
     {
         return state;
     }
+
     public float GetGamePlayingTimer()
     {
         return gamePlayingTimer;
     }
+
     public float GetGamePlayingTimerNormalized()
     {
         return gamePlayingTimer / gamePlayingTimeTotal;
