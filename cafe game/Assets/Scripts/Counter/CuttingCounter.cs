@@ -11,7 +11,7 @@ public class CuttingCounter : BaseCounter
 
     [SerializeField] private ProgressBarUI progressBarUI;
 
-    [SerializeField] private CuttingCounterVisual cuttingCounterVisual;
+   [SerializeField] private CuttingCounterVisual cuttingCounterVisual;
 
     private int cuttingCount = 0;
 

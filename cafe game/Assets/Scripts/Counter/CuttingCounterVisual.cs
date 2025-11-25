@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CuttingCounterVisual : MonoBehaviour
 {
+  
     private const string CUT = "Cut";
 
     private Animator anim;

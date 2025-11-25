@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float waitingToStartTimer = 1f;
     [SerializeField] private float countDownToStartTimer = 3f;
     [SerializeField] private float gamePlayingTimer = 60f;
+    private float gamePlayingTimeTotal;
 
     private bool isGamePaused = false;
 
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+        gamePlayingTimeTotal = gamePlayingTimer;
     }
 
     private void Start()
@@ -187,5 +189,13 @@ public class GameManager : MonoBehaviour
     public State GetState()
     {
         return state;
+    }
+    public float GetGamePlayingTimer()
+    {
+        return gamePlayingTimer;
+    }
+    public float GetGamePlayingTimerNormalized()
+    {
+        return gamePlayingTimer / gamePlayingTimeTotal;
     }
 }
