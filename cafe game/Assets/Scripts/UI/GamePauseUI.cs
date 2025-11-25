@@ -4,9 +4,12 @@ using UnityEngine.UI;
 
 public class GamePauseUI : MonoBehaviour
 {
+   
     [SerializeField] private GameObject uiParent;
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button menuButton;
+    [SerializeField] private Button settingsButton;
+   
 
     private void Start()
     {
@@ -26,6 +29,10 @@ public class GamePauseUI : MonoBehaviour
         {
             Loader.Load(Loader.Scene.GameMenuScene);
         });
+        settingsButton.onClick.AddListener(() =>
+        {
+            SettingsUI.Instance.Show();
+        });
     }
 
     private void GameManager_OnGameUnpaused(object sender, EventArgs e)
@@ -38,7 +45,7 @@ public class GamePauseUI : MonoBehaviour
         Show();
     }
 
-    private void Show()
+    private  void Show()
     {
         uiParent.SetActive(true);
     }
