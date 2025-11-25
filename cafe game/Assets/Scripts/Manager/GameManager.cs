@@ -1,17 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-   
     public static GameManager Instance { get; private set; }
 
-
     public event EventHandler OnStateChanged;
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnpaused;
 
-  
     public enum State
     {
         WaitingToStart,
@@ -24,43 +21,48 @@ public class GameManager : MonoBehaviour
 
     private State state;
 
-
     [SerializeField] private float waitingToStartTimer = 1f;
     [SerializeField] private float countDownToStartTimer = 3f;
     [SerializeField] private float gamePlayingTimer = 60f;
-    private bool isGamePause = false;
+
+    private bool isGamePaused = false;
 
     private void Awake()
     {
-
-   
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-     
     }
 
     private void Start()
     {
         TurnToWaitingToStart();
-        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
 
+        // 监听暂停输入（GameInput 里触发 OnPauseAction）
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
     }
-    private void GameInput_OnPauseAction(object sender,EventArgs e)
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e)
     {
+        // 按一次暂停 / 再按一次继续
         ToggleGame();
     }
 
     private void Update()
     {
+        if (isGamePaused)
+        {
+            // 暂停时不再更新计时器和状态机
+            return;
+        }
+
         switch (state)
         {
             case State.WaitingToStart:
-                waitingToStartTimer -= Time.deltaTime;
+                waitingToStartTimer -= Time.unscaledDeltaTime;
                 if (waitingToStartTimer <= 0f)
                 {
                     TurnToCountDownToStart();
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case State.CountDownToStart:
-                countDownToStartTimer -= Time.deltaTime;
+                countDownToStartTimer -= Time.unscaledDeltaTime;
                 if (countDownToStartTimer <= 0f)
                 {
                     TurnToGamePlaying();
@@ -76,7 +78,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case State.GamePlaying:
-                gamePlayingTimer -= Time.deltaTime;
+                gamePlayingTimer -= Time.unscaledDeltaTime;
                 if (gamePlayingTimer <= 0f)
                 {
                     TurnToGameOver();
@@ -84,7 +86,6 @@ public class GameManager : MonoBehaviour
                 break;
 
             case State.GameOver:
-               
                 break;
         }
     }
@@ -118,14 +119,50 @@ public class GameManager : MonoBehaviour
     }
 
     private void DisablePlayer()
-    { 
-            player.enabled = false;  
+    {
+        if (player != null)
+        {
+            player.enabled = false;
+        }
     }
 
     private void EnablePlayer()
     {
-            player.enabled = true; 
+        if (player != null)
+        {
+            player.enabled = true;
+        }
     }
+
+    // ========= 暂停相关 =========
+
+    public void ToggleGame()
+    {
+        if (isGamePaused)
+        {
+            UnpauseGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+
+    private void PauseGame()
+    {
+        isGamePaused = true;
+        Time.timeScale = 0f;
+        OnGamePaused?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void UnpauseGame()
+    {
+        isGamePaused = false;
+        Time.timeScale = 1f;
+        OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+    }
+
+    // ========= 对外查询接口 =========
 
     public bool IsCountDownState()
     {
@@ -147,21 +184,8 @@ public class GameManager : MonoBehaviour
         return countDownToStartTimer;
     }
 
- 
     public State GetState()
     {
         return state;
-    }
-    private void ToggleGame()
-    {
-        isGamePause = !isGamePause;
-        if(isGamePause)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
     }
 }
