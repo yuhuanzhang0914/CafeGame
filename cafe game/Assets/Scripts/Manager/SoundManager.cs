@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioClipRefsS0 audioClipRefsSO;
 
-    // �������� 0-10
+    // 整数音量 0-10
     private int volume = 5;
 
     private void Awake()
@@ -55,12 +55,18 @@ public class SoundManager : MonoBehaviour
         PlaySound(audioClipRefsSO.deliveryFail, Camera.main.transform.position);
     }
 
+    // 👉 倒计时音效：改成 public，外部可以调用
+    public void PlayCountDownSound(float volumeMultiplier = 1f)
+    {
+        // 使用带 Camera.main 的那个重载
+        PlaySound(audioClipRefsSO.warning, volumeMultiplier);
+    }
+
     public void PlayStepSound(float volumeMultiplier = 1f)
     {
         PlaySound(audioClipRefsSO.footstep, volumeMultiplier);
     }
 
-   
     private void PlaySound(AudioClip[] clips, Vector3 position, float volumeMultiplier = 1f)
     {
         if (clips == null || clips.Length == 0) return;
@@ -68,18 +74,15 @@ public class SoundManager : MonoBehaviour
         int index = UnityEngine.Random.Range(0, clips.Length);
         AudioClip clip = clips[index];
 
-     
         AudioSource.PlayClipAtPoint(clip, position, volume * 0.1f * volumeMultiplier);
     }
 
- 
     private void PlaySound(AudioClip[] clips, float volumeMultiplier = 1f)
     {
         if (Camera.main == null) return;
         PlaySound(clips, Camera.main.transform.position, volumeMultiplier);
     }
 
- 
     public void ChangeVolume()
     {
         volume++;
