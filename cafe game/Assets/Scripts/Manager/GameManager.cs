@@ -1,4 +1,4 @@
-using System;
+锘縰sing System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -44,13 +44,13 @@ public class GameManager : MonoBehaviour
     {
         TurnToWaitingToStart();
 
-        // 监听暂停输入（GameInput 里触发 OnPauseAction）
+        // 录脿脤媒脭脻脥拢脢盲脠毛拢篓GameInput 脌茂麓楼路垄 OnPauseAction拢漏
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e)
     {
-        // 按一次暂停 / 再按一次继续
+        // 掳麓脪禄麓脦脭脻脥拢 / 脭脵掳麓脪禄麓脦录脤脨酶
         ToggleGame();
     }
 
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
     {
         if (isGamePaused)
         {
-            // 暂停时不再更新计时器和状态机
+            // 脭脻脥拢脢卤虏禄脭脵赂眉脨脗录脝脢卤脝梅潞脥脳麓脤卢禄煤
             return;
         }
 
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    private void TurnToCountDownToStart()
+    public void TurnToCountDownToStart()
     {
         state = State.CountDownToStart;
         DisablePlayer();
@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // ========= 暂停相关 =========
+    // ========= 脭脻脥拢脧脿鹿脴 =========
 
     public void ToggleGame()
     {
@@ -165,9 +165,9 @@ public class GameManager : MonoBehaviour
         OnGameUnpaused?.Invoke(this, EventArgs.Empty);
     }
 
-    // ========= 状态查询 =========
+    // ========= 脳麓脤卢虏茅脩炉 =========
 
-    // 供 UITutorialUI 等脚本调用
+    // 鹿漏 UITutorialUI 碌脠陆脜卤戮碌梅脫脙
     public bool IsWaitingToStartState()
     {
         return state == State.WaitingToStart;
@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
         return state == State.GameOver;
     }
 
-    // ========= 对外提供的计时信息 =========
+    // ========= 露脭脥芒脤谩鹿漏碌脛录脝脢卤脨脜脧垄 =========
 
     public float GetCountDownToStartTimer()
     {
