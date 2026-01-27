@@ -1,55 +1,65 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class IntroManager : MonoBehaviour
 {
     [Header("Panels")]
-    public gameObject[] panels; // Assign your 6 panels in order in the Inspector
+    public GameObject[] panels;
 
     [Header("Next Button")]
-    public Button nextButton; // Assign your Next button in the Inspector
+    public Button nextButton; 
 
-    [Header("Main Menu")]
-    public gameObject GameMenu; // Assign your GameMenu UI here
+    [Header("Scene To Load After Intro")]
+    public string nextSceneName = "1-GameMenu";
 
     private int currentIndex = 0;
 
     void Start()
     {
-        // Show only the first panel
+       
+        if (panels == null || panels.Length == 0)
+        {
+            Debug.LogError("IntroManager: No panels assigned!");
+            return;
+        }
+
+       
         for (int i = 0; i < panels.Length; i++)
+        {
             panels[i].SetActive(i == 0);
+        }
 
-        // Hook up the Next button to call NextPanel
-        nextButton.onClick.AddListener(NextPanel);
-
-        // Hide the main menu at start
-        if (gameMenu != null)
-            gameMenu.SetActive(false);
+        
+        if (nextButton != null)
+        {
+            nextButton.onClick.AddListener(NextPanel);
+        }
+        else
+        {
+            Debug.LogError("IntroManager: Next Button not assigned!");
+        }
     }
 
     public void NextPanel()
     {
-        // Hide current panel
-        panels[currentIndex].SetActive(false);
+       
+        if (currentIndex >= panels.Length)
+            return;
 
-        // Move to next panel
+        
+        panels[currentIndex].SetActive(false);
         currentIndex++;
 
         if (currentIndex < panels.Length)
         {
-            // Show next panel
+            
             panels[currentIndex].SetActive(true);
         }
         else
         {
-            // Finished all panels → show main menu
-            if (gameMenu != null)
-                gameMenu.SetActive(true);
-
-            // Disable intro panels and button
-            gameObject.SetActive(false);
-            nextButton.interactable = false;
+            
+            SceneManager.LoadScene(nextSceneName);
         }
     }
 }
