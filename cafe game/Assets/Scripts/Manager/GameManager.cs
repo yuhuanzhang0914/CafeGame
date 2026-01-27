@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,48 +45,37 @@ public class GameManager : MonoBehaviour
     {
         TurnToWaitingToStart();
 
-        // ¼àÌýÔÝÍ£ÊäÈë£¨GameInput Àï´¥·¢ OnPauseAction£©
+        // Listen for pause input
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e)
     {
-        // °´Ò»´ÎÔÝÍ£ / ÔÙ°´Ò»´Î¼ÌÐø
         ToggleGame();
     }
 
     private void Update()
     {
-        if (isGamePaused)
-        {
-            // ÔÝÍ£Ê±²»ÔÙ¸üÐÂ¼ÆÊ±Æ÷ºÍ×´Ì¬»ú
-            return;
-        }
+        if (isGamePaused) return;
 
         switch (state)
         {
             case State.WaitingToStart:
                 waitingToStartTimer -= Time.deltaTime;
                 if (waitingToStartTimer <= 0f)
-                {
                     TurnToCountDownToStart();
-                }
                 break;
 
             case State.CountDownToStart:
                 countDownToStartTimer -= Time.deltaTime;
                 if (countDownToStartTimer <= 0f)
-                {
                     TurnToGamePlaying();
-                }
                 break;
 
             case State.GamePlaying:
                 gamePlayingTimer -= Time.deltaTime;
                 if (gamePlayingTimer <= 0f)
-                {
                     TurnToGameOver();
-                }
                 break;
 
             case State.GameOver:
@@ -113,42 +103,39 @@ public class GameManager : MonoBehaviour
         EnablePlayer();
         OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
+    public static bool didPlayerDoWellStatic;
 
     private void TurnToGameOver()
     {
         state = State.GameOver;
         DisablePlayer();
         OnStateChanged?.Invoke(this, EventArgs.Empty);
+
+        int successful = OrderManager.Instance.GetSuccessDeliveryCount();
+        int threshold = 3;
+        didPlayerDoWellStatic = successful >= threshold;
+
+        // Load the ending scene
+        SceneManager.LoadScene("EndingScene");
     }
 
     private void DisablePlayer()
     {
         if (player != null)
-        {
             player.enabled = false;
-        }
     }
 
     private void EnablePlayer()
     {
         if (player != null)
-        {
             player.enabled = true;
-        }
     }
 
-    // ========= ÔÝÍ£Ïà¹Ø =========
-
+    // ========= Pause / Unpause =========
     public void ToggleGame()
     {
-        if (isGamePaused)
-        {
-            UnpauseGame();
-        }
-        else
-        {
-            PauseGame();
-        }
+        if (isGamePaused) UnpauseGame();
+        else PauseGame();
     }
 
     private void PauseGame()
@@ -165,48 +152,15 @@ public class GameManager : MonoBehaviour
         OnGameUnpaused?.Invoke(this, EventArgs.Empty);
     }
 
-    // ========= ×´Ì¬²éÑ¯ =========
+    // ========= State Checks =========
+    public bool IsWaitingToStartState() => state == State.WaitingToStart;
+    public bool IsCountDownState() => state == State.CountDownToStart;
+    public bool IsGamePlayingState() => state == State.GamePlaying;
+    public bool IsGameOverState() => state == State.GameOver;
 
-    // ¹© UITutorialUI µÈ½Å±¾µ÷ÓÃ
-    public bool IsWaitingToStartState()
-    {
-        return state == State.WaitingToStart;
-    }
-
-    public bool IsCountDownState()
-    {
-        return state == State.CountDownToStart;
-    }
-
-    public bool IsGamePlayingState()
-    {
-        return state == State.GamePlaying;
-    }
-
-    public bool IsGameOverState()
-    {
-        return state == State.GameOver;
-    }
-
-    // ========= ¶ÔÍâÌá¹©µÄ¼ÆÊ±ÐÅÏ¢ =========
-
-    public float GetCountDownToStartTimer()
-    {
-        return countDownToStartTimer;
-    }
-
-    public State GetState()
-    {
-        return state;
-    }
-
-    public float GetGamePlayingTimer()
-    {
-        return gamePlayingTimer;
-    }
-
-    public float GetGamePlayingTimerNormalized()
-    {
-        return gamePlayingTimer / gamePlayingTimeTotal;
-    }
+    // ========= Timers =========
+    public float GetCountDownToStartTimer() => countDownToStartTimer;
+    public State GetState() => state;
+    public float GetGamePlayingTimer() => gamePlayingTimer;
+    public float GetGamePlayingTimerNormalized() => gamePlayingTimer / gamePlayingTimeTotal;
 }
