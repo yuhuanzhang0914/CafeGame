@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Fonts/Scenes/EndingScene.unity
     guid: adfe421bee99db2469143d9e690a88d7
+  - enabled: 1
+    path: Assets/Fonts/Scenes/StoryIntro.unity
+    guid: c222edced4f9b5c47add628c17df1591
   m_configObjects: {}
