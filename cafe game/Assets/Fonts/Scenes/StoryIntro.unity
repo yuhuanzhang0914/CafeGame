@@ -1250,9 +1250,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The pie burned during the dinner rush. Just a minute too long. That was
-    all it took.The room went cold. Not temperature\u2014weight. Like the air itself
-    had decided to sit on my chest and wait."
+  m_text: The orders just kept coming in. One wrong order was all it took. It felt
+    like all the air had been sucked out the room.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2831,9 +2830,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The first week passed like a half-remembered dream. Yeast blooming. Ovens
-    humming. Dough warm and alive under my palms. I slept better than I had in years.
-    I told myself that meant I was safe. That was my first mistake.
+  m_text: The first week passed like a half-remembered dream. I slept better than
+    I had in years. I told myself that meant I was safe. That was my first mistake.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

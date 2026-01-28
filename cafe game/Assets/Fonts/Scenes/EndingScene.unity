@@ -1069,7 +1069,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Her smile spoiled. She grew taller. Colder. \u201CSloppy,\u201D she said.
-    The kitchen held its breath. I knew then\u2014\nmistakes were remembered here."
+    The kitchen held its breath. \nSHE WAS GOING TO EAT ME!!!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1384,8 +1384,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Chef Martha smiled, soft and proud. \u201CThat\u2019s my good one,\u201D
-    she said. The ovens hummed. The room felt warm again. And I wanted to stay in
-    it."
+    she said. The burger patties sizzling in the background. The room felt warm again.
+    And I wanted to stay in it."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
