@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,16 +18,16 @@ public class GamePauseUI : MonoBehaviour
         GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
         GameManager.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
 
-        // Resume °´Å¥
+        // Resume Â°Â´Ã…Â¥
         resumeButton.onClick.AddListener(() =>
         {
             GameManager.Instance.ToggleGame();
         });
 
-        // ·µ»ØÖ÷²Ëµ¥°´Å¥
+        // Â·ÂµÂ»Ã˜Ã–Ã·Â²Ã‹ÂµÂ¥Â°Â´Ã…Â¥
         menuButton.onClick.AddListener(() =>
         {
-            Loader.Load(Loader.Scene.GameMenuScene);
+            Loader.Load(Loader.Scene.GameMenu);
         });
         settingsButton.onClick.AddListener(() =>
         {

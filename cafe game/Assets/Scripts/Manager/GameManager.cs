@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         didPlayerDoWellStatic = successful >= threshold;
 
         // Load the ending scene
-        SceneManager.LoadScene("EndingScene");
+        SceneManager.LoadScene("4-EndingScene");
     }
 
     private void DisablePlayer()
