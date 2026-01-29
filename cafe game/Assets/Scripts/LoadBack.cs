@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LoadBack : MonoBehaviour
+public class LoaderCallback : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        Loader.LoadBack();
+        // Wait one frame so the loading scene can render
+        Loader.LoaderCallback();
     }
-
 }

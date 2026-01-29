@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.104, y: 0}
+  m_AnchoredPosition: {x: -11.104004, y: 0}
   m_SizeDelta: {x: 75.505, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &19207495
@@ -659,7 +659,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 26.991467
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -769,7 +769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.104, y: 0}
+  m_AnchoredPosition: {x: -11.104004, y: 0}
   m_SizeDelta: {x: 75.505, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &310124322
@@ -845,7 +845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.104, y: 0}
+  m_AnchoredPosition: {x: -11.104004, y: 0}
   m_SizeDelta: {x: 75.505, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &449071392
@@ -1250,9 +1250,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The pie burned during the dinner rush. Just a minute too long. That was
-    all it took.The room went cold. Not temperature\u2014weight. Like the air itself
-    had decided to sit on my chest and wait."
+  m_text: The orders just kept coming in. One wrong order was all it took. It felt
+    like all the air had been sucked out the room.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1613,7 +1612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.104, y: 0}
+  m_AnchoredPosition: {x: -11.104004, y: 0}
   m_SizeDelta: {x: 75.505, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1097273607
@@ -1972,8 +1971,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.010008, y: -452.281}
-  m_SizeDelta: {x: 2400, y: 190}
+  m_AnchoredPosition: {x: -0.026493, y: -466.06}
+  m_SizeDelta: {x: 2358, y: 147.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1649918950
 MonoBehaviour:
@@ -2297,8 +2296,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.104004, y: 0}
-  m_SizeDelta: {x: 75.504, y: 0}
+  m_AnchoredPosition: {x: 13.323975, y: 0}
+  m_SizeDelta: {x: 26.647, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1719342576
 MonoBehaviour:
@@ -2831,9 +2830,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The first week passed like a half-remembered dream. Yeast blooming. Ovens
-    humming. Dough warm and alive under my palms. I slept better than I had in years.
-    I told myself that meant I was safe. That was my first mistake.
+  m_text: The first week passed like a half-remembered dream. I slept better than
+    I had in years. I told myself that meant I was safe. That was my first mistake.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

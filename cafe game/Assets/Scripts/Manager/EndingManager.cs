@@ -9,7 +9,7 @@ public class EndingManager : MonoBehaviour
     public GameObject endingBad;
 
     [Header("Next Button")]
-    public Button nextButton; // optional
+    public Button nextButton; 
 
     [HideInInspector] public bool didPlayerDoWell;
 
@@ -20,13 +20,13 @@ public class EndingManager : MonoBehaviour
 
     void Start()
     {
-        // Hide both endings initially
+       
         if (endingGood != null) endingGood.SetActive(false);
         if (endingBad != null) endingBad.SetActive(false);
 
         ShowEnding();
 
-        // Hook up next button if assigned
+       
         if (nextButton != null)
             nextButton.onClick.AddListener(OnNextClicked);
     }
@@ -43,7 +43,7 @@ public class EndingManager : MonoBehaviour
 
     private void OnNextClicked()
     {
-        // Load main menu or another scene
+       
         SceneManager.LoadScene("1-GameMenu");
     }
 }
