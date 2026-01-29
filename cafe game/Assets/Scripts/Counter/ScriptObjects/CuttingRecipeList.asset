@@ -9,16 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: de9b120b585027341b40f2395f6845e9, type: 3}
   m_Name: CuttingRecipeList
   m_EditorClassIdentifier: Assembly-CSharp::CuttingRecipeListSO
   list:
-  - input: {fileID: 11400000, guid: 511c777442241cd48921865e1f8e0e4c, type: 2}
-    output: {fileID: 11400000, guid: dea9b5525f1658344840e3ba86b08526, type: 2}
-    cuttingCountMax: 3
-  - input: {fileID: 11400000, guid: f52f72884abd37f429eff0741167a26a, type: 2}
-    output: {fileID: 11400000, guid: 762434223096f6341859e24f358da7fa, type: 2}
-    cuttingCountMax: 4
   - input: {fileID: 11400000, guid: 55b7a932e4120be48bab26afcd641200, type: 2}
     output: {fileID: 11400000, guid: 70172118440df6e428535563aca67409, type: 2}
-    cuttingCountMax: 5
+    fryingTime: 4
+  - input: {fileID: 11400000, guid: f52f72884abd37f429eff0741167a26a, type: 2}
+    output: {fileID: 11400000, guid: 762434223096f6341859e24f358da7fa, type: 2}
+    fryingTime: 4
+  - input: {fileID: 11400000, guid: 511c777442241cd48921865e1f8e0e4c, type: 2}
+    output: {fileID: 11400000, guid: dea9b5525f1658344840e3ba86b08526, type: 2}
+    fryingTime: 4
+  - input: {fileID: 0}
+    output: {fileID: 0}
+    fryingTime: 0
